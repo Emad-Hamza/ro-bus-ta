@@ -38,5 +38,29 @@ public function destination(): HasOne
 {
     return $this->hasOne(Station::class);
 }
+
+/**
+ * Get the bus that owns the Trip
+ *
+ * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+ */
+public function bus(): BelongsTo
+{
+    return $this->belongsTo(Bus::class);
+}
+
+/**
+ * Get all of the bookings for the Trip
+ *
+ * @return \Illuminate\Database\Eloquent\Relations\HasMany
+ */
+public function bookings(): HasMany
+{
+    return $this->hasMany(Booking::class);
+}
+
+
+
+
     
 }
