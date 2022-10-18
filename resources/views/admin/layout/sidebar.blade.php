@@ -2,12 +2,11 @@
     <nav class="sidebar-nav">
         <ul class="nav">
             <li class="nav-title">{{ trans('brackets/admin-ui::admin.sidebar.content') }}</li>
-            <li class="nav-item"><a class="nav-link" href="{{ url('admin/trips') }}"><i class="nav-icon icon-puzzle"></i> {{ trans('admin.trip.title') }}</a></li>
-           <li class="nav-item"><a class="nav-link" href="{{ url('admin/buses') }}"><i class="nav-icon icon-magnet"></i> {{ trans('admin.bus.title') }}</a></li>
-           <li class="nav-item"><a class="nav-link" href="{{ url('admin/seats') }}"><i class="nav-icon icon-graduation"></i> {{ trans('admin.seat.title') }}</a></li>
-           <li class="nav-item"><a class="nav-link" href="{{ url('admin/bookings') }}"><i class="nav-icon icon-ghost"></i> {{ trans('admin.booking.title') }}</a></li>
-           <li class="nav-item"><a class="nav-link" href="{{ url('admin/users') }}"><i class="nav-icon icon-drop"></i> {{ trans('admin.user.title') }}</a></li>
-           <li class="nav-item"><a class="nav-link" href="{{ url('admin/stations') }}"><i class="nav-icon icon-umbrella"></i> {{ trans('admin.station.title') }}</a></li>
+           <li class="nav-item"><a class="nav-link" href="{{ url('admin/buses') }}"><i class="nav-icon icon-star"></i> {{ trans('admin.bus.title') }}</a></li>
+           <li class="nav-item"><a class="nav-link" href="{{ url('admin/seats') }}"><i class="nav-icon icon-star"></i> {{ trans('admin.seat.title') }}</a></li>
+           <li class="nav-item"><a class="nav-link" href="{{ url('admin/stations') }}"><i class="nav-icon icon-plane"></i> {{ trans('admin.station.title') }}</a></li>
+           <li class="nav-item"><a class="nav-link" href="{{ url('admin/trips') }}"><i class="nav-icon icon-ghost"></i> {{ trans('admin.trip.title') }}</a></li>
+           <li class="nav-item"><a class="nav-link" href="{{ url('admin/stations-trips') }}"><i class="nav-icon icon-magnet"></i> {{ trans('admin.stations-trip.title') }}</a></li>
            {{-- Do not delete me :) I'm used for auto-generation menu items --}}
 
             <li class="nav-title">{{ trans('brackets/admin-ui::admin.sidebar.settings') }}</li>

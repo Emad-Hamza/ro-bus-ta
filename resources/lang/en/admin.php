@@ -154,5 +154,118 @@ return [
         ],
     ],
 
+    'bus' => [
+        'title' => 'Buses',
+
+        'actions' => [
+            'index' => 'Buses',
+            'create' => 'New Bus',
+            'edit' => 'Edit :name',
+        ],
+
+        'columns' => [
+            'id' => 'ID',
+            
+        ],
+    ],
+
+    'seat' => [
+        'title' => 'Seats',
+
+        'actions' => [
+            'index' => 'Seats',
+            'create' => 'New Seat',
+            'edit' => 'Edit :name',
+        ],
+
+        'columns' => [
+            'id' => 'ID',
+            'bus_id' => 'Bus',
+            
+        ],
+    ],
+
+    'station' => [
+        'title' => 'Stations',
+
+        'actions' => [
+            'index' => 'Stations',
+            'create' => 'New Station',
+            'edit' => 'Edit :name',
+        ],
+
+        'columns' => [
+            'id' => 'ID',
+            'name' => 'Name',
+            
+        ],
+    ],
+
+    'bus' => [
+        'title' => 'Buses',
+
+        'actions' => [
+            'index' => 'Buses',
+            'create' => 'New Bus',
+            'edit' => 'Edit :name',
+        ],
+
+        'columns' => [
+            'id' => 'ID',
+            
+        ],
+    ],
+
+    'seat' => [
+        'title' => 'Seats',
+
+        'actions' => [
+            'index' => 'Seats',
+            'create' => 'New Seat',
+            'edit' => 'Edit :name',
+        ],
+
+        'columns' => [
+            'id' => 'ID',
+            'bus_id' => 'Bus',
+            
+        ],
+    ],
+
+    'trip' => [
+        'title' => 'Trips',
+
+        'actions' => [
+            'index' => 'Trips',
+            'create' => 'New Trip',
+            'edit' => 'Edit :name',
+        ],
+
+        'columns' => [
+            'id' => 'ID',
+            'bus_id' => 'Bus',
+            'name' => 'Name',
+            
+        ],
+    ],
+
+    'stations-trip' => [
+        'title' => 'Stations Trips',
+
+        'actions' => [
+            'index' => 'Stations Trips',
+            'create' => 'New Stations Trip',
+            'edit' => 'Edit :name',
+        ],
+
+        'columns' => [
+            'id' => 'ID',
+            'trip_id' => 'Trip',
+            'station_id' => 'Station',
+            'station_order' => 'Station order',
+            
+        ],
+    ],
+
     // Do not delete me :) I'm used for auto-generation
 ];

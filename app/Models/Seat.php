@@ -9,6 +9,9 @@ class Seat extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'bus_id',
+    ];
     /**
      * Get the bus that owns the Seat
      *

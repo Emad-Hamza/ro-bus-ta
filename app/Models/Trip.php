@@ -9,35 +9,10 @@ class Trip extends Model
 {
     use HasFactory;
 
-/**
- * Get all of the trips for the Trip
- *
- * @return \Illuminate\Database\Eloquent\Relations\HasMany
- */
-public function subTrips(): HasMany
-{
-    return $this->hasMany(Trip::class, 'parent_trip_id');
-}
-
-/**
- * Get the start associated with the Trip
- *
- * @return \Illuminate\Database\Eloquent\Relations\HasOne
- */
-public function start(): HasOne
-{
-    return $this->hasOne(Station::class);
-}
-
-/**
- * Get the destination associated with the Trip
- *
- * @return \Illuminate\Database\Eloquent\Relations\HasOne
- */
-public function destination(): HasOne
-{
-    return $this->hasOne(Station::class);
-}
+    protected $fillable = [
+        'name',
+        'bus_id'
+    ];
 
 /**
  * Get the bus that owns the Trip
@@ -57,6 +32,16 @@ public function bus(): BelongsTo
 public function bookings(): HasMany
 {
     return $this->hasMany(Booking::class);
+}
+
+/**
+ * The stations that belong to the Trip
+ *
+ * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+ */
+public function stations(): BelongsToMany
+{
+    return $this->belongsToMany(Station::class);
 }
 
 

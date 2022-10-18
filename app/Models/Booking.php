@@ -39,5 +39,26 @@ class Booking extends Model
         return $this->belongsTo(Seat::class);
     }
     
+    /**
+ * Get the start associated with the Trip
+ *
+ * @return \Illuminate\Database\Eloquent\Relations\HasOne
+ */
+public function start(): HasOne
+{
+    return $this->hasOne(Station::class);
+}
+
+/**
+ * Get the destination associated with the Trip
+ *
+ * @return \Illuminate\Database\Eloquent\Relations\HasOne
+ */
+public function destination(): HasOne
+{
+    return $this->hasOne(Station::class);
+}
+
+    
 
 }

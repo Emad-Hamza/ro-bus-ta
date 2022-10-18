@@ -87,3 +87,56 @@ $factory->define(App\Models\Station::class, static function (Faker\Generator $fa
         
     ];
 });
+/** @var \Illuminate\Database\Eloquent\Factory $factory */
+$factory->define(App\Models\Station::class, static function (Faker\Generator $faker) {
+    return [
+        'created_at' => $faker->dateTime,
+        'name' => $faker->firstName,
+        'updated_at' => $faker->dateTime,
+        
+        
+    ];
+});
+/** @var \Illuminate\Database\Eloquent\Factory $factory */
+$factory->define(App\Models\Station::class, static function (Faker\Generator $faker) {
+    return [
+        'name' => $faker->firstName,
+        'created_at' => $faker->dateTime,
+        'updated_at' => $faker->dateTime,
+        
+        
+    ];
+});
+/** @var \Illuminate\Database\Eloquent\Factory $factory */
+$factory->define(App\Models\Seat::class, static function (Faker\Generator $faker) {
+    return [
+        'created_at' => $faker->dateTime,
+        'updated_at' => $faker->dateTime,
+        'bus_id' => $faker->sentence,
+        
+        
+    ];
+});
+/** @var \Illuminate\Database\Eloquent\Factory $factory */
+$factory->define(App\Models\Trip::class, static function (Faker\Generator $faker) {
+    return [
+        'created_at' => $faker->dateTime,
+        'updated_at' => $faker->dateTime,
+        'bus_id' => $faker->sentence,
+        'name' => $faker->firstName,
+        
+        
+    ];
+});
+/** @var \Illuminate\Database\Eloquent\Factory $factory */
+$factory->define(App\Models\StationsTrip::class, static function (Faker\Generator $faker) {
+    return [
+        'trip_id' => $faker->sentence,
+        'station_id' => $faker->sentence,
+        'station_order' => $faker->randomNumber(5),
+        'created_at' => $faker->dateTime,
+        'updated_at' => $faker->dateTime,
+        
+        
+    ];
+});

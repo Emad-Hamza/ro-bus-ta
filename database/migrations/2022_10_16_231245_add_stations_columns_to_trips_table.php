@@ -32,7 +32,9 @@ return new class extends Migration
     {
         Schema::table('trips', function (Blueprint $table) {
             $table->dropForeign(['start_id']);
+            $table->dropColumn('start_id');
             $table->dropForeign(['destination_id']);
+            $table->dropColumn('destination_id');
         });
     }
 };

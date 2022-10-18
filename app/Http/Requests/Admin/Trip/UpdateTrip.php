@@ -27,9 +27,7 @@ class UpdateTrip extends FormRequest
     {
         return [
             'bus_id' => ['sometimes', 'string'],
-            'destination_id' => ['sometimes', 'string'],
-            'parent_trip_id' => ['nullable', 'string'],
-            'start_id' => ['sometimes', 'string'],
+            'name' => ['sometimes', 'string'],
             
         ];
     }

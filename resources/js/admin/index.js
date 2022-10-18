@@ -4,6 +4,5 @@ import './profile-edit-password';
 import './trip';
 import './bus';
 import './seat';
-import './booking';
-import './user';
 import './station';
+import './stations-trip';

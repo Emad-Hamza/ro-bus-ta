@@ -25,7 +25,7 @@ class IndexTrip extends FormRequest
     public function rules(): array
     {
         return [
-            'orderBy' => 'in:bus_id,destination_id,id,parent_trip_id,start_id|nullable',
+            'orderBy' => 'in:id,bus_id,name|nullable',
             'orderDirection' => 'in:asc,desc|nullable',
             'search' => 'string|nullable',
             'page' => 'integer|nullable',

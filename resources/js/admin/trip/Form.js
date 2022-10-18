@@ -6,9 +6,7 @@ Vue.component('trip-form', {
         return {
             form: {
                 bus_id:  '' ,
-                destination_id:  '' ,
-                parent_trip_id:  '' ,
-                start_id:  '' ,
+                name:  '' ,
                 
             }
         }

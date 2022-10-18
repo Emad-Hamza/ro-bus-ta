@@ -27,9 +27,7 @@ class StoreTrip extends FormRequest
     {
         return [
             'bus_id' => ['required', 'string'],
-            'destination_id' => ['required', 'string'],
-            'parent_trip_id' => ['nullable', 'string'],
-            'start_id' => ['required', 'string'],
+            'name' => ['required', 'string'],
             
         ];
     }

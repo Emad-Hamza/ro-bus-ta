@@ -29,6 +29,7 @@ return new class extends Migration
     {
         Schema::table('trips', function (Blueprint $table) {
             $table->dropForeign(['parent_trip_id']);
+            $table->dropColumn('parent_trip_id');
         });
     }
 };

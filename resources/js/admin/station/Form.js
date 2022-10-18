@@ -5,6 +5,7 @@ Vue.component('station-form', {
     data: function() {
         return {
             form: {
+                name:  '' ,
                 
             }
         }

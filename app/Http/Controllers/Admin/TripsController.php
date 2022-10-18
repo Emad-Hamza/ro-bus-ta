@@ -37,10 +37,10 @@ class TripsController extends Controller
             $request,
 
             // set columns to query
-            ['bus_id', 'destination_id', 'id', 'parent_trip_id', 'start_id'],
+            ['id', 'bus_id', 'name'],
 
             // set columns to searchIn
-            ['id']
+            ['id', 'name']
         );
 
         if ($request->ajax()) {

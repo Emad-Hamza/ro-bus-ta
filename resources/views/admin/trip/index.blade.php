@@ -49,16 +49,14 @@
                                             </label>
                                         </th>
 
-                                        <th is='sortable' :column="'bus_id'">{{ trans('admin.trip.columns.bus_id') }}</th>
-                                        <th is='sortable' :column="'destination_id'">{{ trans('admin.trip.columns.destination_id') }}</th>
                                         <th is='sortable' :column="'id'">{{ trans('admin.trip.columns.id') }}</th>
-                                        <th is='sortable' :column="'parent_trip_id'">{{ trans('admin.trip.columns.parent_trip_id') }}</th>
-                                        <th is='sortable' :column="'start_id'">{{ trans('admin.trip.columns.start_id') }}</th>
+                                        <th is='sortable' :column="'bus_id'">{{ trans('admin.trip.columns.bus_id') }}</th>
+                                        <th is='sortable' :column="'name'">{{ trans('admin.trip.columns.name') }}</th>
 
                                         <th></th>
                                     </tr>
                                     <tr v-show="(clickedBulkItemsCount > 0) || isClickedAll">
-                                        <td class="bg-bulk-info d-table-cell text-center" colspan="7">
+                                        <td class="bg-bulk-info d-table-cell text-center" colspan="5">
                                             <span class="align-middle font-weight-light text-dark">{{ trans('brackets/admin-ui::admin.listing.selected_items') }} @{{ clickedBulkItemsCount }}.  <a href="#" class="text-primary" @click="onBulkItemsClickedAll('/admin/trips')" v-if="(clickedBulkItemsCount < pagination.state.total)"> <i class="fa" :class="bulkCheckingAllLoader ? 'fa-spinner' : ''"></i> {{ trans('brackets/admin-ui::admin.listing.check_all_items') }} @{{ pagination.state.total }}</a> <span class="text-primary">|</span> <a
                                                         href="#" class="text-primary" @click="onBulkItemsClickedAllUncheck()">{{ trans('brackets/admin-ui::admin.listing.uncheck_all_items') }}</a>  </span>
 
@@ -77,11 +75,9 @@
                                             </label>
                                         </td>
 
-                                    <td>@{{ item.bus_id }}</td>
-                                        <td>@{{ item.destination_id }}</td>
-                                        <td>@{{ item.id }}</td>
-                                        <td>@{{ item.parent_trip_id }}</td>
-                                        <td>@{{ item.start_id }}</td>
+                                    <td>@{{ item.id }}</td>
+                                        <td>@{{ item.bus_id }}</td>
+                                        <td>@{{ item.name }}</td>
                                         
                                         <td>
                                             <div class="row no-gutters">
