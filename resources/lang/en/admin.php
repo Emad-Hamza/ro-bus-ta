@@ -1,0 +1,158 @@
+<?php
+
+return [
+    'admin-user' => [
+        'title' => 'Users',
+
+        'actions' => [
+            'index' => 'Users',
+            'create' => 'New User',
+            'edit' => 'Edit :name',
+            'edit_profile' => 'Edit Profile',
+            'edit_password' => 'Edit Password',
+        ],
+
+        'columns' => [
+            'id' => 'ID',
+            'last_login_at' => 'Last login',
+            'first_name' => 'First name',
+            'last_name' => 'Last name',
+            'email' => 'Email',
+            'password' => 'Password',
+            'password_repeat' => 'Password Confirmation',
+            'activated' => 'Activated',
+            'forbidden' => 'Forbidden',
+            'language' => 'Language',
+                
+            //Belongs to many relations
+            'roles' => 'Roles',
+                
+        ],
+    ],
+
+    'admin-user' => [
+        'title' => 'Users',
+
+        'actions' => [
+            'index' => 'Users',
+            'create' => 'New User',
+            'edit' => 'Edit :name',
+            'edit_profile' => 'Edit Profile',
+            'edit_password' => 'Edit Password',
+        ],
+
+        'columns' => [
+            'id' => 'ID',
+            'last_login_at' => 'Last login',
+            'activated' => 'Activated',
+            'email' => 'Email',
+            'first_name' => 'First name',
+            'forbidden' => 'Forbidden',
+            'language' => 'Language',
+            'last_name' => 'Last name',
+            'password' => 'Password',
+            'password_repeat' => 'Password Confirmation',
+                
+            //Belongs to many relations
+            'roles' => 'Roles',
+                
+        ],
+    ],
+
+    'trip' => [
+        'title' => 'Trips',
+
+        'actions' => [
+            'index' => 'Trips',
+            'create' => 'New Trip',
+            'edit' => 'Edit :name',
+        ],
+
+        'columns' => [
+            'id' => 'ID',
+            'bus_id' => 'Bus',
+            'destination_id' => 'Destination',
+            'parent_trip_id' => 'Parent trip',
+            'start_id' => 'Start',
+            
+        ],
+    ],
+
+    'bus' => [
+        'title' => 'Buses',
+
+        'actions' => [
+            'index' => 'Buses',
+            'create' => 'New Bus',
+            'edit' => 'Edit :name',
+        ],
+
+        'columns' => [
+            'id' => 'ID',
+            
+        ],
+    ],
+
+    'seat' => [
+        'title' => 'Seats',
+
+        'actions' => [
+            'index' => 'Seats',
+            'create' => 'New Seat',
+            'edit' => 'Edit :name',
+        ],
+
+        'columns' => [
+            'id' => 'ID',
+            'bus_id' => 'Bus',
+            
+        ],
+    ],
+
+    'booking' => [
+        'title' => 'Booking',
+
+        'actions' => [
+            'index' => 'Booking',
+            'create' => 'New Booking',
+            'edit' => 'Edit :name',
+        ],
+
+        'columns' => [
+            'id' => 'ID',
+            
+        ],
+    ],
+
+    'user' => [
+        'title' => 'User',
+
+        'actions' => [
+            'index' => 'User',
+            'create' => 'New User',
+            'edit' => 'Edit :name',
+        ],
+
+        'columns' => [
+            'id' => 'ID',
+            
+        ],
+    ],
+
+    'station' => [
+        'title' => 'Station',
+
+        'actions' => [
+            'index' => 'Station',
+            'create' => 'New Station',
+            'edit' => 'Edit :name',
+        ],
+
+        'columns' => [
+            'id' => 'ID',
+            
+        ],
+    ],
+
+    // Do not delete me :) I'm used for auto-generation
+];

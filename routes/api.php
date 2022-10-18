@@ -17,3 +17,12 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+Route::prefix('seats')->group(function () {
+    Route::name('seats.')->group(function() {
+        Route::get('/', [\App\Http\Controllers\API\BadgeController::class, 'index'])->name('index');
+        Route::get('/{id}', [\App\Http\Controllers\API\BadgeController::class, 'show'])->name('show');
+    });
+});
+
+
