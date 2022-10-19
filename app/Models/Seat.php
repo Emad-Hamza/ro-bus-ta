@@ -17,7 +17,7 @@ class Seat extends Model
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function bus(): BelongsTo
+    public function bus()
     {
         return $this->belongsTo(Bus::class);
     }
@@ -27,7 +27,7 @@ class Seat extends Model
      *
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-    public function bookings(): HasMany
+    public function bookings()
     {
         return $this->hasMany(Booking::class);
     }

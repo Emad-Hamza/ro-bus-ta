@@ -267,5 +267,25 @@ return [
         ],
     ],
 
+    'booking' => [
+        'title' => 'Bookings',
+
+        'actions' => [
+            'index' => 'Bookings',
+            'create' => 'New Booking',
+            'edit' => 'Edit :name',
+        ],
+
+        'columns' => [
+            'id' => 'ID',
+            'trip_id' => 'Trip',
+            'user_id' => 'User',
+            'seat_id' => 'Seat',
+            'start_id' => 'Start',
+            'destination_id' => 'Destination',
+            
+        ],
+    ],
+
     // Do not delete me :) I'm used for auto-generation
 ];

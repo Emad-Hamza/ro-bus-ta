@@ -14,7 +14,7 @@ class Bus extends Model
      *
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-    public function seats(): HasMany
+    public function seats()
     {
         return $this->hasMany(Seat::class);
     }

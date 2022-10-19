@@ -19,7 +19,7 @@ class Trip extends Model
  *
  * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
  */
-public function bus(): BelongsTo
+public function bus()
 {
     return $this->belongsTo(Bus::class);
 }
@@ -29,7 +29,7 @@ public function bus(): BelongsTo
  *
  * @return \Illuminate\Database\Eloquent\Relations\HasMany
  */
-public function bookings(): HasMany
+public function bookings()
 {
     return $this->hasMany(Booking::class);
 }
@@ -39,11 +39,17 @@ public function bookings(): HasMany
  *
  * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
  */
-public function stations(): BelongsToMany
+public function stations()
 {
-    return $this->belongsToMany(Station::class);
+    return $this->belongsToMany(Station::class, 'stations_trips');
 }
 
+// public function stationsInRange($start, $destination)
+// {
+//     return $this->belongsToMany(Station::class)
+//                 ->wherePivotIn('id', [$start, $destination]);
+
+// }
 
 
 

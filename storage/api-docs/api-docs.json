@@ -4,7 +4,67 @@
         "title": "ro-bus-ta APIs",
         "version": "0.1"
     },
+    "servers": [
+        {
+            "url": "/api"
+        }
+    ],
     "paths": {
-        "/": {}
+        "/": {},
+        "/seats": {
+            "get": {
+                "tags": [
+                    "seat"
+                ],
+                "summary": "Seats list",
+                "description": "Display a listing of the resource.",
+                "operationId": "877f572b9184d98e5e713dc7fe8420fb",
+                "parameters": [
+                    {
+                        "name": "start_station_id",
+                        "in": "query",
+                        "required": false,
+                        "style": "form",
+                        "explode": true,
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "integer",
+                                "enum": [
+                                    1,
+                                    2,
+                                    3,
+                                    4
+                                ]
+                            }
+                        }
+                    },
+                    {
+                        "name": "destination_station_id",
+                        "in": "query",
+                        "required": false,
+                        "style": "form",
+                        "explode": true,
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "integer",
+                                "enum": [
+                                    1,
+                                    2,
+                                    3,
+                                    4
+                                ]
+                            }
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Returns list of Seats"
+                    }
+                }
+            }
+        }
     }
 }

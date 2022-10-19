@@ -40,7 +40,17 @@ class StationsTripsController extends Controller
             ['trip_id', 'station_id', 'station_order'],
 
             // set columns to searchIn
-            ['']
+            [''],
+            function ($query) use ($request) {                      
+    
+                // add this line if you want to search by tags attributes
+                $query->leftJoin('stations', 'stations.id', '=', 'stations_trips.station_id')
+                ->leftJoin('trips', 'trips.id', '=', 'stations_trips.trip_id')
+                ->select('stations_trips.*', 'stations.name  as station_name',
+                'trips.name  as trip_name')
+                ;
+            }
+    
         );
 
         if ($request->ajax()) {

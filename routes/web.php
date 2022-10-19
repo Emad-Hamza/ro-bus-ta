@@ -120,3 +120,18 @@ Route::middleware(['auth:' . config('admin-auth.defaults.guard'), 'admin'])->gro
         });
     });
 });
+
+/* Auto-generated admin routes */
+Route::middleware(['auth:' . config('admin-auth.defaults.guard'), 'admin'])->group(static function () {
+    Route::prefix('admin')->namespace('App\Http\Controllers\Admin')->name('admin/')->group(static function() {
+        Route::prefix('bookings')->name('bookings/')->group(static function() {
+            Route::get('/',                                             'BookingsController@index')->name('index');
+            Route::get('/create',                                       'BookingsController@create')->name('create');
+            Route::post('/',                                            'BookingsController@store')->name('store');
+            Route::get('/{booking}/edit',                               'BookingsController@edit')->name('edit');
+            Route::post('/bulk-destroy',                                'BookingsController@bulkDestroy')->name('bulk-destroy');
+            Route::post('/{booking}',                                   'BookingsController@update')->name('update');
+            Route::delete('/{booking}',                                 'BookingsController@destroy')->name('destroy');
+        });
+    });
+});

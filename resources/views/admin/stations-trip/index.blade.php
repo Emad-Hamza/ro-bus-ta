@@ -75,8 +75,8 @@
                                             </label>
                                         </td>
 
-                                    <td>@{{ item.trip_id }}</td>
-                                        <td>@{{ item.station_id }}</td>
+                                    <td>@{{ item.trip_name }}</td>
+                                        <td>@{{ item.station_name }}</td>
                                         <td>@{{ item.station_order }}</td>
                                         
                                         <td>

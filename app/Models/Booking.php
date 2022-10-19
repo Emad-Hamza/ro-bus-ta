@@ -9,12 +9,19 @@ class Booking extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'trip_id',
+        'user_id',
+        'seat_id',
+        'start_id',
+        'destination_id'
+    ];
     /**
      * Get the trip that owns the Booking
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function trip(): BelongsTo
+    public function trip()
     {
         return $this->belongsTo(Trip::class);
     }
@@ -24,7 +31,7 @@ class Booking extends Model
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function user(): BelongsTo
+    public function user()
     {
         return $this->belongsTo(User::class);
     }
@@ -34,30 +41,31 @@ class Booking extends Model
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function seat(): BelongsTo
+    public function seat()
     {
         return $this->belongsTo(Seat::class);
     }
     
     /**
- * Get the start associated with the Trip
- *
- * @return \Illuminate\Database\Eloquent\Relations\HasOne
- */
-public function start(): HasOne
-{
-    return $this->hasOne(Station::class);
-}
+    * Get the start associated with the Trip
+    *
+    * @return \Illuminate\Database\Eloquent\Relations\HasOne
+    */
+    public function start()
+    {
+        return $this->belongsTo(Station::class);
+    }
 
-/**
- * Get the destination associated with the Trip
- *
- * @return \Illuminate\Database\Eloquent\Relations\HasOne
- */
-public function destination(): HasOne
-{
-    return $this->hasOne(Station::class);
-}
+    /**
+     *  * Get the destination associated with the Trip
+     * *
+     * * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     * 
+     * */
+    public function destination()
+    {
+        return $this->belongsTo(Station::class);
+    }
 
     
 

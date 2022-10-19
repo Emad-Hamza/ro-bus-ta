@@ -18,10 +18,15 @@ class Station extends Model
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
      */
-    public function trips(): BelongsToMany
+    public function trips()
     {
         return $this->belongsToMany(Trips::class, 'role_user_table', 'user_id', 'role_id');
     }
+
+    
+
+    
+
 
     
 

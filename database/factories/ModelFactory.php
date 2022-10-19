@@ -140,3 +140,17 @@ $factory->define(App\Models\StationsTrip::class, static function (Faker\Generato
         
     ];
 });
+/** @var \Illuminate\Database\Eloquent\Factory $factory */
+$factory->define(App\Models\Booking::class, static function (Faker\Generator $faker) {
+    return [
+        'trip_id' => $faker->sentence,
+        'user_id' => $faker->sentence,
+        'seat_id' => $faker->sentence,
+        'created_at' => $faker->dateTime,
+        'updated_at' => $faker->dateTime,
+        'start_id' => $faker->sentence,
+        'destination_id' => $faker->sentence,
+        
+        
+    ];
+});

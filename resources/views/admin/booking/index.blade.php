@@ -49,11 +49,17 @@
                                             </label>
                                         </th>
 
+                                        <th is='sortable' :column="'id'">{{ trans('admin.booking.columns.id') }}</th>
+                                        <th is='sortable' :column="'trip_id'">{{ trans('admin.booking.columns.trip_id') }}</th>
+                                        <th is='sortable' :column="'user_id'">{{ trans('admin.booking.columns.user_id') }}</th>
+                                        <th is='sortable' :column="'seat_id'">{{ trans('admin.booking.columns.seat_id') }}</th>
+                                        <th is='sortable' :column="'start_id'">{{ trans('admin.booking.columns.start_id') }}</th>
+                                        <th is='sortable' :column="'destination_id'">{{ trans('admin.booking.columns.destination_id') }}</th>
 
                                         <th></th>
                                     </tr>
                                     <tr v-show="(clickedBulkItemsCount > 0) || isClickedAll">
-                                        <td class="bg-bulk-info d-table-cell text-center" colspan="2">
+                                        <td class="bg-bulk-info d-table-cell text-center" colspan="8">
                                             <span class="align-middle font-weight-light text-dark">{{ trans('brackets/admin-ui::admin.listing.selected_items') }} @{{ clickedBulkItemsCount }}.  <a href="#" class="text-primary" @click="onBulkItemsClickedAll('/admin/bookings')" v-if="(clickedBulkItemsCount < pagination.state.total)"> <i class="fa" :class="bulkCheckingAllLoader ? 'fa-spinner' : ''"></i> {{ trans('brackets/admin-ui::admin.listing.check_all_items') }} @{{ pagination.state.total }}</a> <span class="text-primary">|</span> <a
                                                         href="#" class="text-primary" @click="onBulkItemsClickedAllUncheck()">{{ trans('brackets/admin-ui::admin.listing.uncheck_all_items') }}</a>  </span>
 
@@ -72,7 +78,13 @@
                                             </label>
                                         </td>
 
-                                    
+                                    <td>@{{ item.id }}</td>
+                                        <td>@{{ item.trip_id }}</td>
+                                        <td>@{{ item.user_id }}</td>
+                                        <td>@{{ item.seat_id }}</td>
+                                        <td>@{{ item.start_id }}</td>
+                                        <td>@{{ item.destination_id }}</td>
+                                        
                                         <td>
                                             <div class="row no-gutters">
                                                 <div class="col-auto">
