@@ -154,3 +154,10 @@ $factory->define(App\Models\Booking::class, static function (Faker\Generator $fa
         
     ];
 });
+/** @var \Illuminate\Database\Eloquent\Factory $factory */
+$factory->define(App\Models\StationsTrip::class, static function (Faker\Generator $faker) {
+    return [
+        
+        
+    ];
+});

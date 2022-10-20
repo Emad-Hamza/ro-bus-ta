@@ -3,7 +3,9 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Models\Booking;
 use App\Models\Seat;
+use App\Models\StationsTrip;
 use App\Models\Trip;
 use App\Models\Bus;
 use App\Models\Station;
@@ -58,70 +60,62 @@ class SeatController extends Controller
      *
      * )
      *
-     * @return \Illuminate\Http\Response
+     * @return array|\Illuminate\Http\Response
      */
     public function index(Request $request)
     {
-         $startStationId = $request->input('start_station_id');
-         $startStation = Station::find($startStationId);
-         $destinationStationId = $request->input('destination_station_id');
-         $destinationStation = Station::find($destinationStationId);
-         $stationsIds = [$startStationId, $destinationStationId];
-        $trips = Trip::whereHas('stations', function (Builder $query) use($startStationId) {
+
+        $startStationId = $request->input('start_station_id');
+        $destinationStationId = $request->input('destination_station_id');
+        $trips = Trip::whereHas('stations', function (Builder $query) use ($startStationId) {
             $query->where('stations.id', $startStationId);
         })
-        ->whereHas('stations', function (Builder $query) use($destinationStationId) {
-            $query->where('stations.id', $destinationStationId);
-        })
-        ->get();
+            ->whereHas('stations', function (Builder $query) use ($destinationStationId) {
+                $query->where('stations.id', $destinationStationId);
+            })
+            ->get();
+
 
         $seats = [];
-        foreach($trips as $trip)
-        {
-            if($trip instanceOf Trip){
+        foreach ($trips as $trip) {
+            if ($trip instanceOf Trip) {
+                $startStationOrder = StationsTrip::where('trip_id', $trip->id)
+                    ->where('station_id', $startStationId)->first()->station_order;
 
-                // dd($trip->stations()->get());
-                // $destinationOrder = ;
-                $query = $trip->bus()->first()->seats()
-                ->with('bookings')
-                ->whereHas('bookings', function (Builder $query) use($destinationStation) {
-                    $query->with('start')
-                    ->where('start.order', '>', 2);
-                    
-                })
-                
+//                dd($startOrder->);
+                $destinationStationOrder = StationsTrip::where('trip_id', $trip->id)
+                    ->where('station_id', $destinationStationId)->first()->station_order;
 
-                // ->with('bookings.destination')
-                // ->where('bookings.start.id', '=', 0)
-                // ->where(function ($query) use ($startStation, $destinationStation) {
-                        // $query->where('bookings.destination.order', '=<', $startStation->order)
-                        // ->orWhere('bookings.start.order', '=>', $destinationStation->order)
-                        // ;
-                    // })
-                
-                ;
-                
-                // dd($query->get());
-                
-                array_push($seats, $trip->bus()->first()->seats()->getQuery());
+
+                if ($startStationOrder < $destinationStationOrder) {
+                    $tripSeats = $trip->bus()->first()->seats()
+                        ->doesntHave('bookings')
+//
+                        ->orWhereHas('bookings.start.trips', function (Builder $query) use ($destinationStationOrder, $trip) {
+                            $query->where('stations_trips.station_order', '>=', $destinationStationOrder)
+                            ->where('stations_trips.trip_id', $trip->id);
+                        })
+                        ->orWhereHas('bookings.destination.trips', function (Builder $query) use ($startStationOrder, $trip) {
+                            $query->where('stations_trips.station_order', '<=', $startStationOrder)
+                                ->where('stations_trips.trip_id', $trip->id);
+                        })->get();
+
+
+
+                    array_push($seats, $tripSeats);
+                }
             }
         }
 
 
-
-        
-        return $seats;
-        $seats = Seat::where('bus_id', 2)->get();
         return $seats;
     }
-    
-
 
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
@@ -132,7 +126,7 @@ class SeatController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Seat  $seat
+     * @param  \App\Models\Seat $seat
      * @return \Illuminate\Http\Response
      */
     public function show(Seat $seat)
@@ -143,8 +137,8 @@ class SeatController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Seat  $seat
+     * @param  \Illuminate\Http\Request $request
+     * @param  \App\Models\Seat $seat
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, Seat $seat)
@@ -155,7 +149,7 @@ class SeatController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Seat  $seat
+     * @param  \App\Models\Seat $seat
      * @return \Illuminate\Http\Response
      */
     public function destroy(Seat $seat)
@@ -163,5 +157,5 @@ class SeatController extends Controller
         //
     }
 
-    
+
 }

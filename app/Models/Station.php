@@ -20,7 +20,7 @@ class Station extends Model
      */
     public function trips()
     {
-        return $this->belongsToMany(Trips::class, 'role_user_table', 'user_id', 'role_id');
+        return $this->belongsToMany(Trip::class, 'stations_trips');
     }
 
     
