@@ -11,6 +11,125 @@
     ],
     "paths": {
         "/": {},
+        "/bookings/book": {
+            "post": {
+                "tags": [
+                    "booking"
+                ],
+                "summary": "Books a seat in a certain trip",
+                "description": "Seats booking",
+                "operationId": "7d7cec09309d714cd1344481ca29bab6",
+                "requestBody": {
+                    "required": false,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "trip_id": {
+                                        "type": "integer",
+                                        "example": "2"
+                                    },
+                                    "seat_id": {
+                                        "type": "integer",
+                                        "example": "3"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Returns a success message"
+                    }
+                }
+            }
+        },
+        "/login": {
+            "post": {
+                "tags": [
+                    "login"
+                ],
+                "summary": "Authenticates customer and returns token.",
+                "description": "Customer login",
+                "operationId": "09e51bef15f4fca5d7375d2da57197f6",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "email": {
+                                        "type": "email",
+                                        "example": "emad.aldin.hamza@gmail.com"
+                                    },
+                                    "password": {
+                                        "type": "password",
+                                        "example": "123456789"
+                                    },
+                                    "device_name": {
+                                        "type": "string",
+                                        "example": "self"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Returns a user token",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "token": {
+                                            "type": "string",
+                                            "example": "The provided credentials are incorrect."
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Returns a error message",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "The provided credentials are incorrect."
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation error/missing parameters",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "The provided credentials are incorrect."
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
         "/seats": {
             "get": {
                 "tags": [
@@ -62,6 +181,26 @@
                 "responses": {
                     "200": {
                         "description": "Returns list of Seats"
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "responses": {
+            "401": {
+                "description": "Returns a error message",
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "properties": {
+                                "message": {
+                                    "type": "string",
+                                    "example": "The provided credentials are incorrect."
+                                }
+                            },
+                            "type": "object"
+                        }
                     }
                 }
             }
