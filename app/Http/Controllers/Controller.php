@@ -12,7 +12,17 @@ use Illuminate\Routing\Controller as BaseController;
  *  @OA\PathItem(
  *      path="/"
  *  )
-
+ * @OAS\SecurityScheme(
+ *      securityScheme="sanctum",
+ *      type="apiKey",
+ *      scheme="bearer"
+ * )
+ * @OA\SecurityScheme(
+ *          securityScheme="sanctum",
+ *          type="apiKey",
+ *          in="header",
+ *          name="Authorization"
+ *      )
  */
 class Controller extends BaseController
 {

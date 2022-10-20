@@ -55,7 +55,46 @@ class SeatController extends Controller
      *
      *     @OA\Response(
      *         response=200,
-     *         description="Returns list of Seats",
+     *         description="Returns list of Trip and its seats",
+     *        @OA\JsonContent(
+     *             type="array",
+     *                @OA\Items(
+     *                      @OA\Property(
+     *                         property="trip_id",
+     *                         type="integer",
+     *                      ),
+     *                      @OA\Property(
+     *                         property="trip_name",
+     *                         type="string",
+     *                      ),
+     *                      @OA\Property(
+     *                         property="trip_seats",
+     *                         type="array",
+     *                @OA\Items(
+     *                      @OA\Property(
+     *                         property="id",
+     *                         type="integer",
+     *                      ),
+     *                      @OA\Property(
+     *                         property="created_at",
+     *                         type="string",
+     *                      ),
+     *                      @OA\Property(
+     *                         property="updated_at",
+     *                         type="string",
+     *
+     *                      ),
+     *                      @OA\Property(
+     *                         property="bus_id",
+     *                         type="integer",
+     *
+     *                      ),
+     *
+     *                ),
+     *                      ),
+     *
+     *                ),
+     *             ),
      *     ),
      *
      * )
@@ -93,7 +132,7 @@ class SeatController extends Controller
 //
                         ->orWhereHas('bookings.start.trips', function (Builder $query) use ($destinationStationOrder, $trip) {
                             $query->where('stations_trips.station_order', '>=', $destinationStationOrder)
-                            ->where('stations_trips.trip_id', $trip->id);
+                                ->where('stations_trips.trip_id', $trip->id);
                         })
                         ->orWhereHas('bookings.destination.trips', function (Builder $query) use ($startStationOrder, $trip) {
                             $query->where('stations_trips.station_order', '<=', $startStationOrder)
@@ -101,8 +140,12 @@ class SeatController extends Controller
                         })->get();
 
 
-
-                    array_push($seats, $tripSeats);
+                    array_push($seats,
+                        [
+                            'trip_id' => $trip->id,
+                            'trip_name' => $trip->name,
+                            'trip_seats' => $tripSeats
+                        ]);
                 }
             }
         }

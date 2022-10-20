@@ -40,3 +40,6 @@ Route::middleware('auth:sanctum')->group(function () {
         });
     });
 });
+
+Route::resource('stations', \App\Http\Controllers\Api\StationController::class);
+

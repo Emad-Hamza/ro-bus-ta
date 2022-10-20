@@ -180,7 +180,83 @@
                 ],
                 "responses": {
                     "200": {
-                        "description": "Returns list of Seats"
+                        "description": "Returns list of Trip and its seats",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "properties": {
+                                            "trip_id": {
+                                                "type": "integer"
+                                            },
+                                            "trip_name": {
+                                                "type": "string"
+                                            },
+                                            "trip_seats": {
+                                                "type": "array",
+                                                "items": {
+                                                    "properties": {
+                                                        "id": {
+                                                            "type": "integer"
+                                                        },
+                                                        "created_at": {
+                                                            "type": "string"
+                                                        },
+                                                        "updated_at": {
+                                                            "type": "string"
+                                                        },
+                                                        "bus_id": {
+                                                            "type": "integer"
+                                                        }
+                                                    },
+                                                    "type": "object"
+                                                }
+                                            }
+                                        },
+                                        "type": "object"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/stations": {
+            "get": {
+                "tags": [
+                    "station"
+                ],
+                "summary": "Stations list",
+                "description": "Display a listing of the resource.",
+                "operationId": "79f4a5c80596ae83a01b25712284f1b2",
+                "responses": {
+                    "200": {
+                        "description": "Returns list of available stations for booking",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "properties": {
+                                                    "station_id": {
+                                                        "type": "integer"
+                                                    },
+                                                    "station_name": {
+                                                        "type": "string"
+                                                    }
+                                                },
+                                                "type": "object"
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
                     }
                 }
             }
@@ -203,6 +279,14 @@
                         }
                     }
                 }
+            }
+        },
+        "securitySchemes": {
+            "sanctum": {
+                "type": "apiKey",
+                "description": "Enter token in format (Bearer <token>)",
+                "name": "Authorization",
+                "in": "header"
             }
         }
     }
