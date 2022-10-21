@@ -86,7 +86,7 @@ class BookingController extends Controller
      *     )
      *     ),
      *     @OA\Response(
-     *         response=200,
+     *         response=201,
      *         description="Returns a success message",
      *     @OA\JsonContent(
      *          @OA\Property(property="booking_id", type="integer"),

@@ -7,3 +7,4 @@ import './seat';
 import './station';
 import './stations-trip';
 import './booking';
+import './user';
