@@ -20,7 +20,7 @@
                 "description": "Seats booking",
                 "operationId": "7d7cec09309d714cd1344481ca29bab6",
                 "requestBody": {
-                    "required": false,
+                    "required": true,
                     "content": {
                         "application/json": {
                             "schema": {
@@ -32,6 +32,14 @@
                                     "seat_id": {
                                         "type": "integer",
                                         "example": "3"
+                                    },
+                                    "start_station_id": {
+                                        "type": "integer",
+                                        "example": "3"
+                                    },
+                                    "destination_station_id": {
+                                        "type": "integer",
+                                        "example": "3"
                                     }
                                 },
                                 "type": "object"
@@ -41,9 +49,65 @@
                 },
                 "responses": {
                     "200": {
-                        "description": "Returns a success message"
+                        "description": "Returns a success message",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "booking_id": {
+                                            "type": "integer"
+                                        },
+                                        "trip_id": {
+                                            "type": "integer"
+                                        },
+                                        "user_id": {
+                                            "type": "integer"
+                                        },
+                                        "seat_id": {
+                                            "type": "integer"
+                                        },
+                                        "start_id": {
+                                            "type": "integer"
+                                        },
+                                        "destination_id": {
+                                            "type": "integer"
+                                        },
+                                        "created_at": {
+                                            "type": "string",
+                                            "format": "date-time"
+                                        },
+                                        "updated_at": {
+                                            "type": "string",
+                                            "format": "date-time"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Returns a error message",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "The provided credentials are incorrect."
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
                     }
-                }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
             }
         },
         "/login": {
@@ -136,13 +200,13 @@
                     "seat"
                 ],
                 "summary": "Seats list",
-                "description": "Display a listing of the resource.",
+                "description": "Display a each trip that matches the desired pick up\nand destinations and its seats.",
                 "operationId": "877f572b9184d98e5e713dc7fe8420fb",
                 "parameters": [
                     {
                         "name": "start_station_id",
                         "in": "query",
-                        "required": false,
+                        "required": true,
                         "style": "form",
                         "explode": true,
                         "schema": {
@@ -153,7 +217,9 @@
                                     1,
                                     2,
                                     3,
-                                    4
+                                    4,
+                                    5,
+                                    6
                                 ]
                             }
                         }
@@ -161,7 +227,7 @@
                     {
                         "name": "destination_station_id",
                         "in": "query",
-                        "required": false,
+                        "required": true,
                         "style": "form",
                         "explode": true,
                         "schema": {
@@ -172,7 +238,9 @@
                                     1,
                                     2,
                                     3,
-                                    4
+                                    4,
+                                    5,
+                                    6
                                 ]
                             }
                         }
@@ -194,6 +262,39 @@
                                                 "type": "string"
                                             },
                                             "trip_seats": {
+                                                "properties": {
+                                                    "trip_stations": {
+                                                        "type": "array",
+                                                        "items": {
+                                                            "properties": {
+                                                                "id": {
+                                                                    "type": "integer"
+                                                                },
+                                                                "created_at": {
+                                                                    "type": "string"
+                                                                },
+                                                                "updated_at": {
+                                                                    "type": "string"
+                                                                },
+                                                                "pivot": {
+                                                                    "properties": {
+                                                                        "trip_id": {
+                                                                            "type": "integer"
+                                                                        },
+                                                                        "station_id": {
+                                                                            "type": "integer"
+                                                                        },
+                                                                        "stations_id": {
+                                                                            "type": "integer"
+                                                                        }
+                                                                    },
+                                                                    "type": "object"
+                                                                }
+                                                            },
+                                                            "type": "object"
+                                                        }
+                                                    }
+                                                },
                                                 "type": "array",
                                                 "items": {
                                                     "properties": {
@@ -263,24 +364,6 @@
         }
     },
     "components": {
-        "responses": {
-            "401": {
-                "description": "Returns a error message",
-                "content": {
-                    "application/json": {
-                        "schema": {
-                            "properties": {
-                                "message": {
-                                    "type": "string",
-                                    "example": "The provided credentials are incorrect."
-                                }
-                            },
-                            "type": "object"
-                        }
-                    }
-                }
-            }
-        },
         "securitySchemes": {
             "sanctum": {
                 "type": "apiKey",

@@ -10,6 +10,7 @@ use App\Models\Trip;
 use App\Models\Bus;
 use App\Models\Station;
 use App\Http\Resources\SeatCollection;
+use App\Service\SeatService;
 use Illuminate\Http\Request;
 use Illuminate\Database\Eloquent\Builder;
 use Psy\Command\WhereamiCommand;
@@ -17,7 +18,8 @@ use Psy\Command\WhereamiCommand;
 class SeatController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * Display a each trip that matches the desired pick up
+     * and destinations and its seats.
      *
      * @OA\Get(
      *     path="/seats",
@@ -28,12 +30,12 @@ class SeatController extends Controller
      *         name="start_station_id",
      *         in="query",
      *         explode=true,
-     *         required=false,
+     *         required=true,
      *         @OA\Schema(
      *             type="array",
      *             @OA\Items(
      *                 type="integer",
-     *                 enum = {1, 2, 3, 4},
+     *                 enum = {1, 2, 3, 4, 5, 6},
      *             )
      *         ),
      *         style="form"
@@ -42,12 +44,12 @@ class SeatController extends Controller
      *         name="destination_station_id",
      *         in="query",
      *         explode=true,
-     *         required=false,
+     *         required=true,
      *         @OA\Schema(
      *             type="array",
      *             @OA\Items(
      *                 type="integer",
-     *                 enum = {1, 2, 3, 4},
+     *                 enum = {1, 2, 3, 4, 5, 6},
      *             )
      *         ),
      *         style="form"
@@ -70,7 +72,7 @@ class SeatController extends Controller
      *                      @OA\Property(
      *                         property="trip_seats",
      *                         type="array",
-     *                @OA\Items(
+     *                      @OA\Items(
      *                      @OA\Property(
      *                         property="id",
      *                         type="integer",
@@ -87,10 +89,44 @@ class SeatController extends Controller
      *                      @OA\Property(
      *                         property="bus_id",
      *                         type="integer",
+     *                      ),
+     *                ),
      *
+     *                      @OA\Property(
+     *                         property="trip_stations",
+     *                         type="array",
+     *                      @OA\Items(
+     *                      @OA\Property(
+     *                         property="id",
+     *                         type="integer",
+     *                      ),
+     *                      @OA\Property(
+     *                         property="created_at",
+     *                         type="string",
+     *                      ),
+     *                      @OA\Property(
+     *                         property="updated_at",
+     *                         type="string",
+     *                      ),
+     *                      @OA\Property(
+     *                         property="pivot",
+     *                         type="object",
+     *                      @OA\Property(
+     *                         property="trip_id",
+     *                         type="integer",
+     *                      ),
+     *                      @OA\Property(
+     *                         property="station_id",
+     *                         type="integer",
+     *                      ),
+     *                      @OA\Property(
+     *                         property="stations_id",
+     *                         type="integer",
+     *                      ),
+     *                      ),
+     *                      ),
      *                      ),
      *
-     *                ),
      *                      ),
      *
      *                ),
@@ -101,54 +137,20 @@ class SeatController extends Controller
      *
      * @return array|\Illuminate\Http\Response
      */
-    public function index(Request $request)
+    public function index(Request $request, SeatService $seatService)
     {
+
+        $request->validate([
+            'start_station_id' => 'required|integer',
+            'destination_station_id' => 'required|integer',
+        ]);
+
 
         $startStationId = $request->input('start_station_id');
         $destinationStationId = $request->input('destination_station_id');
-        $trips = Trip::whereHas('stations', function (Builder $query) use ($startStationId) {
-            $query->where('stations.id', $startStationId);
-        })
-            ->whereHas('stations', function (Builder $query) use ($destinationStationId) {
-                $query->where('stations.id', $destinationStationId);
-            })
-            ->get();
 
 
-        $seats = [];
-        foreach ($trips as $trip) {
-            if ($trip instanceOf Trip) {
-                $startStationOrder = StationsTrip::where('trip_id', $trip->id)
-                    ->where('station_id', $startStationId)->first()->station_order;
-
-//                dd($startOrder->);
-                $destinationStationOrder = StationsTrip::where('trip_id', $trip->id)
-                    ->where('station_id', $destinationStationId)->first()->station_order;
-
-
-                if ($startStationOrder < $destinationStationOrder) {
-                    $tripSeats = $trip->bus()->first()->seats()
-                        ->doesntHave('bookings')
-//
-                        ->orWhereHas('bookings.start.trips', function (Builder $query) use ($destinationStationOrder, $trip) {
-                            $query->where('stations_trips.station_order', '>=', $destinationStationOrder)
-                                ->where('stations_trips.trip_id', $trip->id);
-                        })
-                        ->orWhereHas('bookings.destination.trips', function (Builder $query) use ($startStationOrder, $trip) {
-                            $query->where('stations_trips.station_order', '<=', $startStationOrder)
-                                ->where('stations_trips.trip_id', $trip->id);
-                        })->get();
-
-
-                    array_push($seats,
-                        [
-                            'trip_id' => $trip->id,
-                            'trip_name' => $trip->name,
-                            'trip_seats' => $tripSeats
-                        ]);
-                }
-            }
-        }
+        $seats = $seatService->getValidSeats($startStationId, $destinationStationId);
 
 
         return $seats;

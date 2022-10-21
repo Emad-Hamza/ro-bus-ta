@@ -41,7 +41,7 @@ public function bookings()
  */
 public function stations()
 {
-    return $this->belongsToMany(Station::class, 'stations_trips');
+    return $this->belongsToMany(Station::class, 'stations_trips')->withPivot('station_order');
 }
 
 // public function stationsInRange($start, $destination)
