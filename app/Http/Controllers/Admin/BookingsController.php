@@ -33,16 +33,29 @@ class BookingsController extends Controller
     {
         // create and AdminListing instance for a specific model and
         $data = AdminListing::create(Booking::class)->processRequestAndGet(
-            // pass the request with params
+        // pass the request with params
             $request,
 
             // set columns to query
             ['id', 'trip_id', 'user_id', 'seat_id', 'start_id', 'destination_id'],
 
             // set columns to searchIn
-            ['id']
-        );
+            ['id'],
 
+            function ($query) use ($request) {
+
+                // add this line if you want to search by tags attributes
+                $query->leftJoin('trips', 'trips.id', '=', 'trip_id')
+                    ->leftJoin('users', 'users.id', '=', 'user_id')
+                    ->leftJoin('stations as s', 's.id', '=', 'start_id')
+                    ->leftJoin('stations as d', 'd.id', '=', 'destination_id')
+                    ->select('bookings.*', 'trips.name  as trip_name',
+                        'users.name as user_name', 's.name as start_name',
+                    'd.name as destination_name'
+                        )
+                ;
+            }
+        );
         if ($request->ajax()) {
             if ($request->has('bulk')) {
                 return [
@@ -171,7 +184,7 @@ class BookingsController extends Controller
      * @throws Exception
      * @return Response|bool
      */
-    public function bulkDestroy(BulkDestroyBooking $request) : Response
+    public function bulkDestroy(BulkDestroyBooking $request): Response
     {
         DB::transaction(static function () use ($request) {
             collect($request->data['ids'])

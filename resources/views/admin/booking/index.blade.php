@@ -79,11 +79,11 @@
                                         </td>
 
                                     <td>@{{ item.id }}</td>
-                                        <td>@{{ item.trip_id }}</td>
-                                        <td>@{{ item.user_id }}</td>
+                                        <td>@{{ item.trip_name }}</td>
+                                        <td>@{{ item.user_name }}</td>
                                         <td>@{{ item.seat_id }}</td>
-                                        <td>@{{ item.start_id }}</td>
-                                        <td>@{{ item.destination_id }}</td>
+                                        <td>@{{ item.start_name }}</td>
+                                        <td>@{{ item.destination_name }}</td>
                                         
                                         <td>
                                             <div class="row no-gutters">

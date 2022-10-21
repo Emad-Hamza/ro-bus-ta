@@ -49,6 +49,8 @@ class StationsTripsController extends Controller
                 ->select('stations_trips.*', 'stations.name  as station_name',
                 'trips.name  as trip_name')
                 ;
+
+                dd($query->toSql());
             }
     
         );
