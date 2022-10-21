@@ -32,6 +32,11 @@ docker-compose exec laravel.test npm run craftable-dev
 ```bash
 docker-compose exec laravel.test npm run craftable-dev
 ```
+```bash
+docker-compose exec laravel.test npm run ./vendor/bin/sail up
+or
+docker-compose exec laravel.test npm run php artisan serve
+```
 
 ## Local environment Installation ##
 
