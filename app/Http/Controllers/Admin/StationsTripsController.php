@@ -33,7 +33,7 @@ class StationsTripsController extends Controller
     {
         // create and AdminListing instance for a specific model and
         $data = AdminListing::create(StationsTrip::class)->processRequestAndGet(
-            // pass the request with params
+        // pass the request with params
             $request,
 
             // set columns to query
@@ -41,18 +41,16 @@ class StationsTripsController extends Controller
 
             // set columns to searchIn
             [''],
-            function ($query) use ($request) {                      
-    
+            function ($query) use ($request) {
+
                 // add this line if you want to search by tags attributes
                 $query->leftJoin('stations', 'stations.id', '=', 'stations_trips.station_id')
-                ->leftJoin('trips', 'trips.id', '=', 'stations_trips.trip_id')
-                ->select('stations_trips.*', 'stations.name  as station_name',
-                'trips.name  as trip_name')
-                ;
+                    ->leftJoin('trips', 'trips.id', '=', 'stations_trips.trip_id')
+                    ->select('stations_trips.*', 'stations.name  as station_name',
+                        'trips.name  as trip_name');
 
-                dd($query->toSql());
             }
-    
+
         );
 
         if ($request->ajax()) {
@@ -183,7 +181,7 @@ class StationsTripsController extends Controller
      * @throws Exception
      * @return Response|bool
      */
-    public function bulkDestroy(BulkDestroyStationsTrip $request) : Response
+    public function bulkDestroy(BulkDestroyStationsTrip $request): Response
     {
         DB::transaction(static function () use ($request) {
             collect($request->data['ids'])
