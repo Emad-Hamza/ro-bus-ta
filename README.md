@@ -21,22 +21,20 @@ Or to run the project locally:
 docker-comopse up
 ```
 ```bash
-docker-compose exec laravel.test composer install
+docker compose exec laravel.test composer install
 ```
 ```bash
-docker-compose exec laravel.test npm install
+docker compose exec laravel.test npm install
 ```
 ```bash
-docker-compose exec laravel.test npm run craftable-dev
+docker compose exec laravel.test npm run craftable-dev
 ```
 ```bash
-docker-compose exec laravel.test npm run craftable-dev
+docker compose exec laravel.test npm run craftable-dev
 ```
 ```bash
-docker-compose exec laravel.test npm run ./vendor/bin/sail up
-or
-docker-compose exec laravel.test npm run php artisan serve
-```
+docker compose exec laravel.test npm run ./vendor/bin/sail up ``` or ```bash docker compose exec laravel.test npm run php artisan serve ```
+
 
 ## Local environment Installation ##
 
