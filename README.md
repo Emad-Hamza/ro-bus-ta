@@ -35,7 +35,7 @@ docker compose exec laravel.test npm run craftable-dev
 ```
 5. Start the laravel app server
 ```bash
-docker compose exec laravel.test npm run ./vendor/bin/sail up ```
+docker compose exec laravel.test npm run ./vendor/bin/sail up
 ``` 
 Or
 ```bash
