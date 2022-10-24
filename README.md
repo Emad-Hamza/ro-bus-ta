@@ -18,7 +18,7 @@ Or to run the project locally:
 ## Docker Installation ##
 
 ```bash
-docker-comopser up
+docker-comopse up
 ```
 ```bash
 docker-compose exec laravel.test composer install
