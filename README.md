@@ -19,7 +19,7 @@ Or to run the project locally:
 
 1. Start and run the container
 ```bash
-docker comopse up
+docker compose up
 ```
 2. Install the laravel dependencies
 ```bash
@@ -32,14 +32,6 @@ docker compose exec laravel.test npm install
 4. Compile the assets
 ```bash
 docker compose exec laravel.test npm run craftable-dev
-```
-5. Start the laravel app server
-```bash
-docker compose exec laravel.test npm run ./vendor/bin/sail up
-``` 
-Or
-```bash
-docker compose exec laravel.test npm run php artisan serve
 ```
 
 
