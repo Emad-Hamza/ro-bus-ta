@@ -58,3 +58,11 @@ php artisan serve
 
 - Admin panel: /admin
 - API swagger documentation: /api/documentation
+
+## How it works:
+
+- Each station in a trip has a number(station_order) that represents its order in that trip.
+
+__To create a new trip:__
+1. Create a new entry in /admin/trips
+2. Add stations to that trip by creating entries for each needed stations in /admin/stations-trips using the trip ID and the desired station ID, station, each entry represents a specific station's order in a specific trip.
